@@ -1,7 +1,7 @@
 {
   "id": "attachment-type-icons",
   "name": "Attachment Type Icons",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "minAppVersion": "1.7.0",
   "description": "Shows configurable file-type icons for linked attachments without changing Markdown.",
   "author": "GOODJINC",

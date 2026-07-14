@@ -41,7 +41,7 @@ export class AttachmentTypeIconsSettingTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
-		new Setting(containerEl).setName("Attachment Type Icons").setHeading();
+		new Setting(containerEl).setName("File types").setHeading();
 		containerEl.createEl("p", { text: "Shows icons for regular attachment links. Embedded files and previews are left unchanged." });
 
 		for (const rule of this.plugin.settings.rules) {

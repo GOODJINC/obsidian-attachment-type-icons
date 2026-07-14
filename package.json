@@ -1,6 +1,6 @@
 {
   "name": "attachment-type-icons",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Configurable file-type icons for Obsidian attachment links.",
   "main": "main.js",
   "scripts": {
