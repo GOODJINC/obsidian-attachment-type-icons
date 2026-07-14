@@ -1,0 +1,18 @@
+# Installed dependencies (recreated with npm install)
+node_modules/
+
+# TypeScript and build-tool caches
+*.tsbuildinfo
+.eslintcache
+
+# Local plugin settings and development vault files
+data.json
+.obsidian/
+
+# Editor settings
+.vscode/
+.idea/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
