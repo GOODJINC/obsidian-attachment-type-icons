@@ -1,0 +1,32 @@
+.attachment-type-icons-icon {
+  display: inline;
+  margin-right: 0.05em;
+}
+
+.attachment-type-icons-rule-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: end;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.attachment-type-icons-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.attachment-type-icons-field label {
+  color: var(--text-muted);
+  font-size: var(--font-smallest);
+}
+
+.attachment-type-icons-field:first-child input {
+  width: 5em;
+}
+
+.attachment-type-icons-field:last-child input {
+  min-width: 18em;
+}
