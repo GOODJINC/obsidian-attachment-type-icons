@@ -1,8 +1,8 @@
 # Attachment Type Icons
 
-An Obsidian community plugin that adds configurable file-type icons to regular internal links for attachments. It never changes your Markdown and skips embedded files and previews.
+English | [한국어](https://github.com/GOODJINC/obsidian-attachment-type-icons/blob/main/README.ko.md)
 
-[한국어 README](README.ko.md)
+An Obsidian community plugin that adds configurable file-type icons to regular internal links for attachments. It never changes your Markdown and skips embedded files and previews.
 
 ## Why this plugin exists
 

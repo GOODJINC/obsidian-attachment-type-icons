@@ -1,8 +1,8 @@
 # Attachment Type Icons
 
-일반 첨부파일 링크 앞에 파일 유형 아이콘을 자동으로 표시하는 Obsidian 커뮤니티 플러그인입니다. Markdown 원본, 파일명, 링크 별칭은 변경하지 않으며, 임베드와 미리보기에는 아이콘을 추가하지 않습니다.
+[English](README.md) | 한국어
 
-[English README](README.md)
+일반 첨부파일 링크 앞에 파일 유형 아이콘을 자동으로 표시하는 Obsidian 커뮤니티 플러그인입니다. Markdown 원본, 파일명, 링크 별칭은 변경하지 않으며, 임베드와 미리보기에는 아이콘을 추가하지 않습니다.
 
 ## 만든 이유
 
