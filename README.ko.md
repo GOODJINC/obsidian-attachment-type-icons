@@ -34,6 +34,12 @@
 
 아이콘은 화면에 표시되는 링크에만 추가됩니다. Markdown, 파일명, 링크 별칭은 그대로 유지됩니다.
 
+## 설치
+
+1. 최신 릴리즈에서 `main.js`, `manifest.json`, `styles.css`를 다운로드합니다.
+2. 세 파일을 `<보관함>/.obsidian/plugins/attachment-type-icons/`에 넣습니다.
+3. Obsidian을 다시 불러온 뒤 **설정 → 커뮤니티 플러그인**에서 **Attachment Type Icons**를 활성화합니다.
+
 ## 기본 지원 파일 유형
 
 아래 유형은 기본으로 활성화되어 있습니다. 확장자는 대소문자를 구분하지 않습니다.

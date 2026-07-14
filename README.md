@@ -34,6 +34,12 @@ In Reading view, it displays as:
 
 The icon is added only to the rendered link. Your Markdown, file name, and link alias are never changed.
 
+## Installation
+
+1. Download `main.js`, `manifest.json`, and `styles.css` from the latest release.
+2. Place them in `<your-vault>/.obsidian/plugins/attachment-type-icons/`.
+3. Reload Obsidian, then enable **Attachment Type Icons** under **Settings → Community plugins**.
+
 ## Built-in file types
 
 The following types are enabled by default. All extension matching is case-insensitive.
