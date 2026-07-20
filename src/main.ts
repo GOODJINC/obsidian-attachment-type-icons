@@ -9,16 +9,21 @@ export default class AttachmentTypeIconsPlugin extends Plugin {
 	async onload(): Promise<void> {
 		await this.loadSettings();
 		this.addSettingTab(new AttachmentTypeIconsSettingTab(this.app, this));
-		this.registerMarkdownPostProcessor((element) => this.addIcons(element));
+		this.registerMarkdownPostProcessor((element, context) => this.addIcons(element, context.sourcePath));
 		this.app.workspace.onLayoutReady(() => this.refreshVisibleIcons());
 	}
 
 	async loadSettings(): Promise<void> {
 		const saved = await this.loadData() as Partial<AttachmentTypeIconsSettings> | null;
+		const sourceRules = saved?.rules ?? DEFAULT_SETTINGS.rules;
 		this.settings = {
 			...DEFAULT_SETTINGS,
 			...saved,
-			rules: saved?.rules ?? DEFAULT_SETTINGS.rules.map((rule) => ({ ...rule, extensions: [...rule.extensions] }))
+			rules: sourceRules.map((rule) => ({
+				...rule,
+				extensions: [...(rule.extensions ?? [])],
+				folders: [...(rule.folders ?? [])]
+			}))
 		};
 	}
 
@@ -32,36 +37,49 @@ export default class AttachmentTypeIconsPlugin extends Plugin {
 			if (!(leaf.view instanceof MarkdownView)) continue;
 			const { contentEl } = leaf.view;
 			contentEl.querySelectorAll(`.${ICON_CLASS}`).forEach((icon) => icon.remove());
-			this.addIcons(contentEl);
+			this.addIcons(contentEl, leaf.view.file?.path ?? "");
 		}
 	}
 
-	private addIcons(element: HTMLElement): void {
+	private addIcons(element: HTMLElement, sourcePath: string): void {
 		for (const link of Array.from(element.querySelectorAll<HTMLAnchorElement>("a.internal-link:not(.internal-embed)"))) {
 			if (link.closest(".internal-embed")) continue;
 			if (link.querySelector(`.${ICON_CLASS}`)) continue;
 			const target = link.dataset.href;
 			if (!target) continue;
 
-			const icon = this.iconForTarget(target);
+			const icon = this.iconForTarget(target, sourcePath);
 			if (!icon) continue;
 
-			const iconEl = link.createSpan({ cls: ICON_CLASS, text: `${icon} ` });
-			link.prepend(iconEl);
+			const position = this.settings.iconPosition;
+			const iconEl = link.createSpan({ cls: `${ICON_CLASS} is-${position}`, text: icon });
+			if (position === "after") link.append(iconEl);
+			else link.prepend(iconEl);
 		}
 	}
 
-	private iconForTarget(target: string): string | null {
+	private iconForTarget(target: string, sourcePath: string): string | null {
 		const normalizedTarget = target.split("#", 1)[0].split("?", 1)[0];
-		const extension = normalizedTarget.match(/\.([^.\\/]+)$/)?.[1]?.toLowerCase();
+		const resolvedFile = this.app.metadataCache.getFirstLinkpathDest(normalizedTarget, sourcePath);
+		const extension = resolvedFile?.extension.toLowerCase() ?? normalizedTarget.match(/\.([^.\\/]+)$/)?.[1]?.toLowerCase();
 		if (!extension || extension === "md") return this.settings.showNoteLinks ? this.settings.noteIcon : null;
 
-		const rule = this.matchRule(extension);
-		return rule?.enabled ? rule.icon : null;
+		const rule = this.matchRule(extension, resolvedFile?.path ?? normalizedTarget);
+		return rule?.icon || null;
 	}
 
-	private matchRule(extension: string): FileTypeRule | undefined {
-		return this.settings.rules.find((rule) => rule.extensions.some((candidate) => candidate.toLowerCase() === extension));
+	private matchRule(extension: string, targetPath: string): FileTypeRule | undefined {
+		const candidates = this.settings.rules.filter((rule) => rule.enabled && rule.extensions.some((candidate) => candidate.toLowerCase() === extension));
+		return candidates.find((rule) => rule.folders.length > 0 && this.matchesFolder(targetPath, rule.folders))
+			?? candidates.find((rule) => rule.folders.length === 0);
+	}
+
+	private matchesFolder(targetPath: string, folders: string[]): boolean {
+		const normalizedPath = targetPath.replace(/\\/g, "/").replace(/^\/+/, "").toLowerCase();
+		return folders.some((folder) => {
+			const normalizedFolder = folder.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "").toLowerCase();
+			return normalizedFolder.length > 0 && normalizedPath.startsWith(`${normalizedFolder}/`);
+		});
 	}
 
 }

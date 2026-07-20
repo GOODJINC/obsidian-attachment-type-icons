@@ -1,6 +1,13 @@
 .attachment-type-icons-icon {
   display: inline;
-  margin-right: 0.05em;
+}
+
+.attachment-type-icons-icon.is-before {
+  margin-right: 0.2em;
+}
+
+.attachment-type-icons-icon.is-after {
+  margin-left: 0.2em;
 }
 
 .attachment-type-icons-rule-fields {
@@ -23,10 +30,23 @@
   font-size: var(--font-smallest);
 }
 
-.attachment-type-icons-field:first-child input {
+.attachment-type-icons-field.is-icon input {
   width: 5em;
 }
 
-.attachment-type-icons-field:last-child input {
+.attachment-type-icons-field.is-name input {
+  width: 12em;
+}
+
+.attachment-type-icons-field.is-extensions input {
   min-width: 18em;
+}
+
+.attachment-type-icons-field.is-folders {
+  flex: 1 1 20em;
+}
+
+.attachment-type-icons-field.is-folders input {
+  width: 100%;
+  min-width: 20em;
 }

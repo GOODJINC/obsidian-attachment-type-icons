@@ -26,7 +26,7 @@ Write a normal internal link with an optional display name:
 [[90_Attachments/images/photo.jpg|Laundry-room measurement]]
 ```
 
-In Reading view, it displays as:
+With the default icon position, Reading view displays it as:
 
 ```text
 🖼️ Laundry-room measurement
@@ -57,11 +57,44 @@ Markdown note links are available as an optional type with the `📝` icon, and 
 
 ## Settings
 
-Open **Settings → Attachment Type Icons** to customize each built-in type. Every type has three simple controls:
+Open **Settings → Attachment Type Icons** to customize the built-in types or add your own types.
 
 - **Enable or disable** its icon with a toggle.
+- **Change the type name** to match your workflow.
 - **Change the icon** to any emoji or text symbol.
 - **Add or remove extensions** in the comma-separated extensions field.
+- **Limit a type to one or more folders.** Start typing to choose from folders in your vault, or enter a path directly. Folder-specific types take priority over types that apply everywhere.
+- **Set matching priority** with the up and down buttons. Within the folder-specific and general groups, the first matching type wins.
+- **Place icons before or after** the link text.
+
+The settings page follows Obsidian's app language. Korean is shown when Obsidian is set to Korean; all other app languages use English.
+
+Use **Add file type** to create a type such as `Ebooks` with the `📚` icon and `epub, mobi, pdf` extensions. Custom types can also be deleted from the settings page.
+
+### How matching priority works
+
+Rules are selected in this order:
+
+1. Disabled types and types with a different extension are ignored.
+2. Matching types with a folder condition are checked first. A folder also includes its subfolders.
+3. If multiple folder-specific types match, the highest one in the settings list is used.
+4. If no folder-specific type matches, the highest matching type without a folder condition is used.
+
+In short: **matching folder-specific type → matching general type → no icon**. Use the up and down buttons to decide which type wins when rules in the same group overlap. Moving a general type above a folder-specific type does not override the folder-specific match.
+
+For example, suppose the list is ordered like this:
+
+```text
+1. PDF documents   | pdf       | Any folder       | 📄
+2. Research papers | pdf       | Books/Research   | 🔬
+3. Ebooks          | pdf, epub | Books            | 📚
+```
+
+- `Books/Novel.pdf` uses `📚` because only the `Ebooks` folder rule matches.
+- `Books/Research/Paper.pdf` uses `🔬` because both folder rules match and `Research papers` is higher in the list.
+- `Work/Report.pdf` uses `📄` because no folder-specific rule matches.
+
+To make the research PDF use `📚` instead, move `Ebooks` above `Research papers`.
 
 For example, add `heif` and `avif` to the Images extensions field:
 
@@ -70,6 +103,15 @@ jpg, jpeg, png, gif, webp, svg, heic, heif, avif
 ```
 
 You may include leading dots if you prefer (`.pdf, .epub`). They are removed automatically, so both `.PDF` and `pdf` work the same way.
+
+For example, an `Ebooks` type limited to the `Books` folder can use `pdf` without changing PDF icons elsewhere in the vault:
+
+```text
+Name: Ebooks
+Icon: 📚
+Extensions: epub, mobi, pdf
+Folders: Books
+```
 
 ## Scope
 
