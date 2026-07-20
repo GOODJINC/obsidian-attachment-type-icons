@@ -36,6 +36,8 @@ The icon is added only to the rendered link. Your Markdown, file name, and link 
 
 ## Installation
 
+Requires Obsidian 1.8.7 or later.
+
 1. Download `main.js`, `manifest.json`, and `styles.css` from the latest release.
 2. Place them in `<your-vault>/.obsidian/plugins/attachment-type-icons/`.
 3. Reload Obsidian, then enable **Attachment Type Icons** under **Settings → Community plugins**.

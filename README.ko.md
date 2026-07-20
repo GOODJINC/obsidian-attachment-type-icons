@@ -36,6 +36,8 @@
 
 ## 설치
 
+Obsidian 1.8.7 이상이 필요합니다.
+
 1. 최신 릴리즈에서 `main.js`, `manifest.json`, `styles.css`를 다운로드합니다.
 2. 세 파일을 `<보관함>/.obsidian/plugins/attachment-type-icons/`에 넣습니다.
 3. Obsidian을 다시 불러온 뒤 **설정 → 커뮤니티 플러그인**에서 **Attachment Type Icons**를 활성화합니다.
